@@ -598,7 +598,9 @@ class SalesTaxService extends Component
 
                 $taxCode = $defaultTaxCode;
 
-                if($this->getFieldValue('avataxTaxCode', $lineItem->purchasable->product)) {
+                if($this->getFieldValue('avataxTaxCode', $lineItem->purchasable)) {
+                    $taxCode = $this->getFieldValue('avataxTaxCode', $lineItem->purchasable);
+                } else if($this->getFieldValue('avataxTaxCode', $lineItem->purchasable->product)) {
                     $taxCode = $this->getFieldValue('avataxTaxCode', $lineItem->purchasable->product);
                 }
 
