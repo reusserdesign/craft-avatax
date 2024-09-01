@@ -461,7 +461,8 @@ class SalesTaxService extends Component
             $customerCode = $this->getFieldValue('avataxCustomerCode', $order);
         }
 
-        return $customerCode;
+        // Limit the string to 50 characters, due to Avalara's limit
+        return substr($customerCode, 0, min(50, strlen($customerCode)));
     }
 
     /**
