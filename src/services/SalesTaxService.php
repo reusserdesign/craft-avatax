@@ -101,7 +101,7 @@ class SalesTaxService extends Component
      *
      */
     public function createSalesOrder(Order $order)
-    {    
+    {
         // check for form overrides to plugin settings and bail if disabled
         $disabled = $this->parseOverrideParam('avatax_disable_tax_calculation');
         $enabled = $this->parseOverrideParam('avatax_force_tax_calculation');
@@ -648,10 +648,13 @@ class SalesTaxService extends Component
                     }
                 }
 
+                $itemCode = $adjustment->name;
+                $itemCode = substr($itemCode, 0, min(50, strlen($itemCode)));
+
                 $t = $t->withLine(
                     $adjustment->amount, // Total amount for the line item
                     1,                   // quantity
-                    $adjustment->name,   // Item Code
+                    $itemCode,   // Item Code
                     $discountCode        // Tax Code
                 );
 
